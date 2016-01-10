@@ -139,12 +139,12 @@ post_makeinstall_target() {
 
   # remove getty units, we dont want a console
   rm -rf $INSTALL/usr/lib/systemd/system/autovt@.service
-  #rm -rf $INSTALL/usr/lib/systemd/system/console-getty.service
-  #rm -rf $INSTALL/usr/lib/systemd/system/console-shell.service
+  rm -rf $INSTALL/usr/lib/systemd/system/console-getty.service
+  rm -rf $INSTALL/usr/lib/systemd/system/console-shell.service
   rm -rf $INSTALL/usr/lib/systemd/system/container-getty@.service
   rm -rf $INSTALL/usr/lib/systemd/system/getty.target
   rm -rf $INSTALL/usr/lib/systemd/system/getty@.service
-  rm -rf $INSTALL/usr/lib/systemd/system/serial-getty@.service
+  #rm -rf $INSTALL/usr/lib/systemd/system/serial-getty@.service
   rm -rf $INSTALL/usr/lib/systemd/system/*.target.wants/getty.target
 
   # remove other notused or nonsense stuff (our /etc is ro)

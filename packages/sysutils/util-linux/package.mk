@@ -51,7 +51,7 @@ PKG_CONFIGURE_OPTS_TARGET="--disable-gtk-doc \
                            --disable-nsenter \
                            --disable-setpriv \
                            --disable-eject \
-                           --disable-agetty \
+                           --enable-agetty \
                            --disable-cramfs \
                            --disable-bfs \
                            --disable-minix \
@@ -123,9 +123,11 @@ post_makeinstall_target() {
   rm -rf $INSTALL/usr/share
 
   mkdir -p $INSTALL/usr/sbin
+  mkdir -p $INSTALL/sbin
     cp .libs/blkid $INSTALL/usr/sbin
     cp .libs/fsck $INSTALL/usr/sbin
     cp .libs/losetup $INSTALL/usr/sbin
+    cp agetty $INSTALL/sbin
 
   if [ "$SWAP_SUPPORT" = "yes" ]; then
     cp .libs/swapon $INSTALL/usr/sbin
