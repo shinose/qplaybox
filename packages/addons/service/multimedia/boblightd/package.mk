@@ -1,6 +1,6 @@
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2014 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
 #
 #  OpenELEC is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 PKG_NAME="boblightd"
 PKG_VERSION="478"
-PKG_REV="5"
+PKG_REV="0"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://code.google.com/p/boblight"
@@ -31,6 +31,8 @@ PKG_LONGDESC="Boblight's main purpose is to create light effects from an externa
 
 PKG_IS_ADDON="yes"
 PKG_ADDON_TYPE="xbmc.service"
+PKG_ADDON_PROVIDES=""
+PKG_ADDON_REPOVERSION="7.0"
 
 PKG_AUTORECONF="yes"
 
@@ -39,7 +41,7 @@ if [ "$DISPLAYSERVER" = "x11" ] ; then
 fi
 
 if [ "$OPENGL_SUPPORT" = "yes" ] ; then
-  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET Mesa glu"
+  PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET mesa glu"
 fi
 
 if [ "$OPENGL" = "no" ]; then

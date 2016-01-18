@@ -1,6 +1,6 @@
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2014 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
 #
 #  OpenELEC is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -17,8 +17,8 @@
 ################################################################################
 
 PKG_NAME="imon-mce"
-PKG_VERSION="4.3"
-PKG_REV="1"
+PKG_VERSION="7.0"
+PKG_REV="0"
 PKG_ARCH="any"
 PKG_LICENSE="OSS"
 PKG_SITE="http://www.openelec.tv"
@@ -31,6 +31,8 @@ PKG_LONGDESC="imon-mce is a driver to add support for MCE remotes to the imon dr
 
 PKG_IS_ADDON="yes"
 PKG_ADDON_TYPE="xbmc.service"
+PKG_ADDON_PROVIDES=""
+PKG_ADDON_REPOVERSION="7.0"
 
 PKG_AUTORECONF="no"
 

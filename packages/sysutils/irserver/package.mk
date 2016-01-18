@@ -1,6 +1,6 @@
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2014 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
 #
 #  OpenELEC is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -32,9 +32,7 @@ PKG_LONGDESC="IR Trans transforms your PC into a programmable remote control: It
 PKG_IS_ADDON="no"
 PKG_AUTORECONF="no"
 
-if [ "$TARGET_ARCH" = "i386" ]; then
-  IRSERVER_BIN="irserver"
-elif [ "$TARGET_ARCH" = "x86_64" ]; then
+if [ "$TARGET_ARCH" = "x86_64" ]; then
   IRSERVER_BIN="irserver64"
 elif [ "$TARGET_ARCH" = "arm" ]; then
   IRSERVER_BIN="irserver_arm"

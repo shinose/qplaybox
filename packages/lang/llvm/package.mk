@@ -1,6 +1,6 @@
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2014 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
 #
 #  OpenELEC is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 ################################################################################
 
 PKG_NAME="llvm"
-PKG_VERSION="3.5.1"
+PKG_VERSION="3.7.0"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
@@ -82,9 +82,7 @@ PKG_CONFIGURE_OPTS_TARGET="--enable-polly \
                            --disable-libffi \
                            --disable-ltdl-install"
 
-if [ "$TARGET_ARCH" = i386 ]; then
-  PKG_CONFIGURE_OPTS_TARGET="$PKG_CONFIGURE_OPTS_TARGET --enable-targets=x86,r600"
-elif [ "$TARGET_ARCH" = x86_64 ]; then
+if [ "$TARGET_ARCH" = x86_64 ]; then
   PKG_CONFIGURE_OPTS_TARGET="$PKG_CONFIGURE_OPTS_TARGET --enable-targets=x86_64,r600"
 elif [ "$TARGET_ARCH" = arm ]; then
   PKG_CONFIGURE_OPTS_TARGET="$PKG_CONFIGURE_OPTS_TARGET --enable-targets=arm"

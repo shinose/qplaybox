@@ -1,6 +1,6 @@
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2014 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
 #
 #  OpenELEC is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 ################################################################################
 
 PKG_NAME="pixman"
-PKG_VERSION="0.32.6"
+PKG_VERSION="0.33.4"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="OSS"
@@ -39,7 +39,7 @@ if [ "$TARGET_ARCH" = arm ]; then
     PIXMAN_NEON="--disable-arm-neon"
   fi
   PIXMAN_CONFIG="--disable-mmx --disable-sse2 --disable-vmx --enable-arm-simd $PIXMAN_NEON --disable-arm-iwmmxt"
-elif [ "$TARGET_ARCH" = i386 -o "$TARGET_ARCH" = x86_64  ]; then
+elif [ "$TARGET_ARCH" = x86_64  ]; then
   PIXMAN_CONFIG="--enable-mmx --enable-sse2 --disable-ssse3 --disable-vmx --disable-arm-simd --disable-arm-neon"
 fi
 

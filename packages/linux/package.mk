@@ -1,6 +1,6 @@
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2014 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
 #
 #  OpenELEC is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -17,10 +17,6 @@
 ################################################################################
 
 PKG_NAME="linux"
-
-PKG_VERSION="cuboxi-3.14-dc5edb8"
-PKG_URL="$DISTRO_SRC/$PKG_NAME-$PKG_VERSION.tar.xz"
-
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
@@ -31,8 +27,23 @@ PKG_DEPENDS_INIT="toolchain"
 PKG_NEED_UNPACK="$LINUX_DEPENDS"
 PKG_PRIORITY="optional"
 PKG_SECTION="linux"
-PKG_SHORTDESC="linux: The Linux kernel 3.14 precompiled kernel binary image and modules"
+PKG_SHORTDESC="linux26: The Linux kernel 2.6 precompiled kernel binary image and modules"
 PKG_LONGDESC="This package contains a precompiled kernel image and the modules."
+case "$LINUX" in
+  amlogic)
+    PKG_VERSION="amlogic-3.10-716f179"
+    PKG_URL="$DISTRO_SRC/$PKG_NAME-$PKG_VERSION.tar.xz"
+    ;;
+  imx6)
+    PKG_VERSION="cuboxi-3.14-ea83bda"
+    PKG_URL="$DISTRO_SRC/$PKG_NAME-$PKG_VERSION.tar.xz"
+    PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET imx6-status-led imx6-soc-fan"
+    ;;
+  *)
+    PKG_VERSION="4.4-rc8"
+    PKG_URL="http://www.kernel.org/pub/linux/kernel/v4.x/testing/$PKG_NAME-$PKG_VERSION.tar.xz"
+    ;;
+esac
 
 PKG_IS_ADDON="no"
 PKG_AUTORECONF="no"
@@ -63,11 +74,6 @@ post_patch() {
 
   # set default hostname based on $DISTRONAME
     sed -i -e "s|@DISTRONAME@|$DISTRONAME|g" $PKG_BUILD/.config
-
-  # disable PPP support if not enabled
-  if [ ! "$PPTP_SUPPORT" = yes ]; then
-    sed -i -e "s|^CONFIG_PPP=.*$|# CONFIG_PPP is not set|" $PKG_BUILD/.config
-  fi
 
   # disable swap support if not enabled
   if [ ! "$SWAP_SUPPORT" = yes ]; then
@@ -142,7 +148,13 @@ makeinstall_target() {
     for dtb in arch/arm/boot/dts/*.dtb; do
       cp $dtb $INSTALL/usr/share/bootloader 2>/dev/null || :
     done
-
+  elif [ "$BOOTLOADER" = "bcm2835-bootloader" ]; then
+    mkdir -p $INSTALL/usr/share/bootloader/overlays
+    cp -p arch/arm/boot/dts/*.dtb $INSTALL/usr/share/bootloader
+    for dtb in arch/arm/boot/dts/overlays/*.dtb; do
+      cp $dtb $INSTALL/usr/share/bootloader/overlays 2>/dev/null || :
+    done
+    cp -p arch/arm/boot/dts/overlays/README $INSTALL/usr/share/bootloader/overlays
   fi
 }
 
@@ -163,11 +175,15 @@ makeinstall_init() {
       fi
     done
   fi
+
+  if [ "$UVESAFB_SUPPORT" = yes ]; then
+    mkdir -p $INSTALL/lib/modules
+      uvesafb=`find .install_pkg/lib/modules/$(get_module_dir)/kernel -name uvesafb.ko`
+      cp $uvesafb $INSTALL/lib/modules/`basename $uvesafb`
+  fi
 }
 
 post_install() {
   mkdir -p $INSTALL/lib/firmware/
     ln -sf /storage/.config/firmware/ $INSTALL/lib/firmware/updates
-
-  enable_service cpufreq-threshold.service
 }

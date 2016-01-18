@@ -1,6 +1,6 @@
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2014 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
 #
 #  OpenELEC is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 ################################################################################
 
 PKG_NAME="libaacs"
-PKG_VERSION="0.7.1"
+PKG_VERSION="0.8.1"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
@@ -35,17 +35,11 @@ PKG_AUTORECONF="yes"
 PKG_CONFIGURE_OPTS_TARGET="--disable-werror \
                            --disable-extra-warnings \
                            --disable-optimizations \
-                           --disable-examples \
-                           --disable-debug \
+                           --with-libgcrypt-prefix=$SYSROOT_PREFIX/usr \
+                           --with-libgpg-error-prefix=$SYSROOT_PREFIX/usr \
                            --with-gnu-ld"
-
-pre_configure_target() {
-# libaacs fails to build in subdirs
-  cd $ROOT/$PKG_BUILD
-    rm -rf .$TARGET_NAME
-}
 
 post_makeinstall_target() {
   mkdir -p $INSTALL/usr/config/aacs
-    cp -P KEYDB.cfg $INSTALL/usr/config/aacs
+    cp -P ../KEYDB.cfg $INSTALL/usr/config/aacs
 }

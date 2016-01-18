@@ -1,6 +1,6 @@
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2014 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
 #      Copyright (C) 2011 Anthony Nash (nash.ant@gmail.com)
 #
 #  OpenELEC is free software: you can redistribute it and/or modify
@@ -18,12 +18,12 @@
 ################################################################################
 
 PKG_NAME="vdr"
-PKG_VERSION="2.1.10"
+PKG_VERSION="2.2.0"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.tvdr.de"
-PKG_URL="ftp://ftp.tvdr.de/vdr/Developer/$PKG_NAME-$PKG_VERSION.tar.bz2"
+PKG_URL="ftp://ftp.tvdr.de/vdr/$PKG_NAME-$PKG_VERSION.tar.bz2"
 PKG_DEPENDS_TARGET="toolchain fontconfig freetype libcap libjpeg-turbo bzip2"
 PKG_PRIORITY="optional"
 PKG_SECTION="multimedia"
@@ -55,7 +55,7 @@ EOF
 }
 
 make_target() {
-  make vdr
+  make vdr vdr.pc
   make include-dir
 }
 
